@@ -1,6 +1,6 @@
 <?php
 require_once "inc/config.php";
-$form_header = "<h1 style='color: #5e9ca0;'>Управление пользователями.</h1>";
+$form_header = "<h1>Управление пользователями.</h1>";
 //================================SESSION CHECK =========================================
 /* if( (!isset($_SESSION['username'] ) ) or ( !isset($_SESSION['password'] ) ) or ( !isset($_SESSION['authenticated']) ) ) */
 if(!isset($_SESSION['authenticated']) or (!$_SESSION['authenticated']))
@@ -90,46 +90,70 @@ if(isset($_POST['delete_user'])){
 if(isset($_GET['action'])){
   if($_GET['action'] == "add_user") {
     require_once "add_user.php";
-    $form_header = "<h1 style='color: #5e9ca0;'> Добавление нового пользователя:</h1>";
+    $form_header = "<h1> Добавление нового пользователя:</h1>";
     $outline = $add_user_outline;
   }elseif($_GET['action'] == "changeUser") {
     require_once "add_user.php";
-    $form_header = "<h1 style='color: #5e9ca0;'> Изменение учетной записи пользователя:</h1>";
+    $form_header = "<h1> Изменение учетной записи пользователя:</h1>";
     $outline = $change_user_outline;
   }elseif($_GET['action'] == "service_department_manage") {
     require_once "service_department.php";
-    $form_header = "<h1 style='color: #5e9ca0;'> Управление сервисным подразделением</h1>";
+    $form_header = "<h1> Управление сервисным подразделением</h1>";
     $outline = $out_service_department;
   }
 }
 
 ?>
-
-<html>
+<!-- =============================== HTML HTML HTML ============================ -->
+<!DOCTYPE HTML>
+<html lang="ru">
   <head>
-    <title>Управление пользователями</title>
-    <link rel="stylesheet" type="text/css" href="inc/userManagement.css">
-    <!-- <link rel="stylesheet" type="text/css" href="http://www.mysite.ru/main.css"> -->
-   </head>
-  <body>
-  <p>
-  <div style="float: left; width: 80%; border:1px black;">
-    <a href= <?= $_SERVER['PHP_SELF']?>> ... </a>
-    <a href= <?= $_SERVER['PHP_SELF']."?action=add_user"?>>Добавить нового пользователя</a>
-    <a href= <?= $_SERVER['PHP_SELF']."?action=service_department_manage"?>>Настроить подразделение исполнителя</a>
+  <!-- Подключаемые файлы, метатеги, название страницы -->
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <!-- Кодировка страницы-->
+  <meta charset="utf-8"/> 
+  <title>Управление пользователями</title>
+    <link rel="stylesheet" type="text/css" href="inc/userManagement.css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,300" type="text/css" />
+    <!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+  <!-- Тело сайта, отвечает за вывод на страницу-->
+<div id="wrapper">
+  <!-- HEADER-->
+	<div class="parent">
+    <div class="logotip">
+      <img id="logo" src="../photo/logo_square.jpg" width="100" heght="100"/>
+      
+    </div>
+    <div class="header_text"><h1>Администрирование</h1></div>
+    <div class="user_place">
+      <?= "Вход выполнен,".$_SESSION['username'] ."
+        <img src=\"../photo/admin.jpg\" width='64' height='64'/>
+        <a href='auth.php?logout'>Выйти</a>"; ?>
+    </div>  
   </div>
-  <div style="float: left; width: 20%; border:1px red;">
-  <?= "<p align='center' style=\"color:green;\">Вход выполнен,".$_SESSION['username'] ."</p>
-  <p align='center'><img src=\"../photo/admin.jpg\" width='64' height='64'/></p>
-  <p align='center'><a href='auth.php?logout'>Выйти</a></p>"; ?>
+  <!-- ТOP MENU-->
+  <div class="parent">
+	  <a href= <?= $_SERVER['PHP_SELF']?> ><div class="nav"> Главная </div></a>
+    <a href= <?= $_SERVER['PHP_SELF']."?action=add_user"?>><div class="nav">Добавить нового пользователя</div></a>
+    <a href= <?= $_SERVER['PHP_SELF']."?action=service_department_manage"?>><div class="nav">Настроить подразделение исполнителя</div></a>
   </div>
-  </p>
-
-    <h1><?= $form_header ?></h1>
-    <?= $outline ?>
-
-    
-  </body>
+  <!-- CONTENT-->
+  <div class="parent">
+      <h1><?= $form_header ?></h1>
+      <?= $outline ?>
+    </div>
+</div>
+<!-- FOOTER-->
+<div id="footer">
+  FOOTER
+</div>
+</body>
 </html>
+
 <?php
 //print_r($GLOBALS);

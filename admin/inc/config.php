@@ -12,6 +12,9 @@ define("DB_PASS","\$dU\$er");
 define("USER_PHOTO_PATH","C:/xampp/htdocs/servicedesk/photo/");
 define("PHOTOID","1");
 
+define("FILL_COLOR", "e86d1f");
+define("LOGO",USER_PHOTO_PATH."logo_square.jpg");
+
 require_once "config.additional.php";
 
 

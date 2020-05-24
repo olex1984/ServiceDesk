@@ -1,0 +1,67 @@
+#wrapper {
+	max-width: 960px;
+	margin: auto;
+	/*border: 2px solid blue;*/
+}
+.parent {
+	display: table;
+	width:100%;
+	/*border:2px solid green;*/
+	padding: 20px 0;
+}
+.logotip {
+	display: table-cell;
+	width: 100px;
+	float: left;
+	text-align: center;
+    /*border: #e86d1f 1px solid;*/
+}
+.user_place{
+	display: table-cell;
+	width: 100px;
+	float:right;
+	/*border: 2px solid blue;*/
+}
+.header_text{
+	display: table-cell;
+	width: 500px;
+	text-align: center;
+	vertical-align: middle;
+}
+.nav {
+	display: inline-block; /*Задаем блочно-строчное отображение*/
+  	width: 32%; /*задаем ширину блока*/
+	vertical-align: top;
+	border:2px solid #e86d1f;
+	text-align: center;
+	
+		}
+.nav:hover {
+	background: #e86d1f;
+	}
+.string {
+         text-align: center; /*Равняем текст по-горизонтали*/
+        }
+#footer{
+	width: 100%;
+	border: 2px green solid;
+}
+body {
+	color: #3f3f3f;
+	font: 12px Tahoma, sans-serif;
+	background-color: #dadada;
+	border-top: 5px solid #7e7e7e;
+	margin: 0;
+}
+a{
+	color: #3f3f3f;
+	/*border:2px yellow solid;*/
+}
+a:hover{
+	color: #ffffff;
+	background: #e86d1f;
+	/*border:2px yellow solid;*/
+}
+h1{
+	color: #3f3f3f;
+}
