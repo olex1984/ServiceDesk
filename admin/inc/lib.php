@@ -153,7 +153,10 @@ function drawUsersTable($sql_data,$delete_field = NULL){
         $outline .= "<tr>";
         $id = $row[0];
         foreach ($row as $val) {
-            $outline .= "<td><a href='" . $_SERVER['PHP_SELF']."?action=changeUser&id=".$id."'>$val</a></td>";
+            if(is_null($delete_field))
+                $outline .= "<td><a href='" . $_SERVER['PHP_SELF']."?action=changeUser&id=".$id."'>$val</a></td>";
+            if(!is_null($delete_field))
+                $outline .= "<td>$val</td>";
             
         }
         if(!is_null($delete_field)) 
