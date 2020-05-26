@@ -23,8 +23,9 @@ body {
 .logotip {
 	display: table-cell;
 	width: 250px;
+	height: 90px;
 	background: url("../../pictures/logo-tritec-.png") no-repeat;
-    background-size: 200px 100px;
+	/* background-size: 200px 100px; */
 	text-align: center;
     /* border: #ffffff 1px solid; */
 }
@@ -38,29 +39,37 @@ body {
 	color: white;
 }*/
 .user_place{
+	text-align: right;
 	display: table-cell;
 	width: 100px;
 	/* border: 2px solid blue; */
 }
 .navigation{
 	margin-top: 10px;
-	border-top: 2px solid #3f3f3f;
-	padding-top: 10px;
-	border-bottom: 2px solid #3f3f3f;
-	padding-bottom: 10px;
+	/* border-top: 2px solid #3f3f3f; */
+	padding-top: 5px;
+	/* border-bottom: 2px solid #3f3f3f; */
+	padding-bottom: 5px;
 }
 .nav {
+	color: white;
 	display: inline-block; /*Задаем блочно-строчное отображение*/
 	  width: 32%; /*задаем ширину блока*/
-	  height: 40px;
+	  height: 20px;
 	vertical-align: middle;
 	border:2px solid #e86d1f;
+	background: #e86d1f;
 	border-radius: 5px;
 	text-align: center;
-	padding-top: 20px;
-	margin-left: 5px;
-	
+	padding-top: 5px;
+	margin-left: 5px;	
 }
+.nav:hover{
+	color: #3f3f3f;
+	background: white;
+	
+} 
+
 
 #footer{
 	width: 100%;

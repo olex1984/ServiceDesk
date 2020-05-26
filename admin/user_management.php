@@ -131,8 +131,8 @@ if(isset($_GET['action'])){
     </div>
     <div class="header_text"><h1>Администрирование</h1></div>
     <div class="user_place">
-      <?= "Вход выполнен,".$_SESSION['username'] ."
-        <img src=\"../photo/admin.jpg\" width='64' height='64'/>
+      <?= "<br>Вход выполнен, ".$_SESSION['username'] ."
+        <br><br>
         <a href='auth.php?logout'>Выйти</a>"; ?>
     </div>  
   </div>
