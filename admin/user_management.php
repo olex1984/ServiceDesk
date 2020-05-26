@@ -13,16 +13,16 @@ if(!isset($_SESSION['authenticated']) or (!$_SESSION['authenticated']))
 
 
 //================ USERS OPERATIONS ======================
-if((!isset($_POST['user_action'])) and (!isset($_GET['action']))){
+if((!isset($_POST['user_action'])) and (!isset($_GET['action']))){ //ОТОБРАЖЕНИЕ СТАРОВОЙ СТРАНИЦЫ (ТУПО НИЧЕГО НЕ ВВЕДЕНО)
     $raw_data = getDataFromTable($dbh,"SELECT * FROM users;");
-    $outline = " <table style='border:2pt solid black;'><tr>
-            <th>ID</th><th>Email</th><th>Password</th><th>ФИО</th><th>Описание</th><th>Разное</th><th>Фото ID</th><th>Актвиный</th>
+    $outline = " <table><tr>
+            <th>ID</th><th>Email</th><th>Password</th><th>ФИО</th><th>Описание</th><th>Разное</th><th>Фото ID</th><th>Статус</th>
         </tr>";
     $outline .= drawUsersTable($raw_data);
     $outline .= "</table>";
 }
 
-if(isset($_POST['user_action']) and $_POST['user_action'] == "Сохранить") 
+if(isset($_POST['user_action']) and $_POST['user_action'] == "Сохранить") //ДОБАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯ
 {
 
   $uniqid = uploadUserPhoto();
@@ -47,7 +47,7 @@ if(isset($_POST['user_action']) and $_POST['user_action'] == "Сохранить
     $outline .= "</table>";
   }
  
-if(isset($_POST['user_action']) and $_POST['user_action'] == "Обновить")
+if(isset($_POST['user_action']) and $_POST['user_action'] == "Обновить")  //ОБНВОЛЕНЕИ ПАРАМЕТРОВ ПОЛЬЗОВАТЕЛЯ
 {
   if($_FILES['user_photo']['size'] > 0) {
       $uniqid = uploadUserPhoto();
@@ -77,7 +77,7 @@ if(isset($_POST['user_action']) and $_POST['user_action'] == "Обновить")
     $outline .= drawUsersTable($raw_data);
     $outline .= "</table>";
 }
-if(isset($_POST['delete_user'])){
+if(isset($_POST['delete_user'])){   //УДАЛЕНИЕ ПОЛЬЗОВАТЕЛЯ
   if( $_SESSION['randStr'] == $_POST['inp_captcha'] ){
     //$outline = "DELETE user {$_POST['id']}:".$_SESSION['randStr']." = ". $_POST['inp_captcha'];
     $outline = deleteUserFromTable($dbh,"users",$_POST['id'],$_POST['photoid']);
@@ -116,6 +116,7 @@ if(isset($_GET['action'])){
   <title>Управление пользователями</title>
     <link rel="stylesheet" type="text/css" href="inc/userManagement.css" />
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,300" type="text/css" />
+    <link type="text/plain" rel="author" href="http://localhost/servicedesk/humans.txt" />
     <!--[if lt IE 9]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
@@ -124,10 +125,8 @@ if(isset($_GET['action'])){
   <!-- Тело сайта, отвечает за вывод на страницу-->
 <div id="wrapper">
   <!-- HEADER-->
-	<div class="parent">
+	<div class="header">
     <div class="logotip">
-      <img id="logo" src="../photo/logo_square.jpg" width="100" heght="100"/>
-      
     </div>
     <div class="header_text"><h1>Администрирование</h1></div>
     <div class="user_place">
@@ -137,10 +136,10 @@ if(isset($_GET['action'])){
     </div>  
   </div>
   <!-- ТOP MENU-->
-  <div class="parent">
-	  <a href= <?= $_SERVER['PHP_SELF']?> ><div class="nav"> Главная </div></a>
-    <a href= <?= $_SERVER['PHP_SELF']."?action=add_user"?>><div class="nav">Добавить нового пользователя</div></a>
-    <a href= <?= $_SERVER['PHP_SELF']."?action=service_department_manage"?>><div class="nav">Настроить подразделение исполнителя</div></a>
+  <div class="navigation">
+	  <a class="nav" href= <?= $_SERVER['PHP_SELF']?> > Главная </a>
+    <a class="nav" href= <?= $_SERVER['PHP_SELF']."?action=add_user"?>>Добавить нового пользователя</a>
+    <a class="nav" href= <?= $_SERVER['PHP_SELF']."?action=service_department_manage"?>>Настроить подразделение исполнителя</a>
   </div>
   <!-- CONTENT-->
   <div class="parent">
@@ -150,7 +149,8 @@ if(isset($_GET['action'])){
 </div>
 <!-- FOOTER-->
 <div id="footer">
-  FOOTER
+ <p> <a href="mailto:oleg.zitzer@gmail.com">Author: Oleg Citcer<br>oleg.zitzer@gmail.com</a></p>
+ <p>Saratov, Russia 2020</p>
 </div>
 </body>
 </html>

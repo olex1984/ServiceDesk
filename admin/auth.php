@@ -49,6 +49,7 @@ if( isset($_POST['sub_enter'])  ){
     <!-- <link rel="stylesheet" type="text/css" href="http://www.mysite.ru/main.css"> -->
    </head>
     <body>
+    	<div align="center" style="margin:0 auto; width:210px; background: url(../pictures/logo-tritec-.png) no-repeat; height: 100px; "> </div>
         <div align="center" style = "border:2px gray solid; width:300px; margin:0 auto;">
             <?= $outline ?>
             <form method="POST" action=<?= $_SERVER['PHP_SELF'] ?> >
@@ -58,6 +59,11 @@ if( isset($_POST['sub_enter'])  ){
                 <input type="submit" name="sub_enter" value = "Enter" />
             </form>
         </div>
+        
+        <div id="footer">
+ <p> <a href="mailto:oleg.zitzer@gmail.com">Author: Oleg Citcer<br>oleg.zitzer@gmail.com</a></p>
+ <p>Saratov, Russia 2020</p>
+</div>
     </body>
 </html>
 <?php //print_r($GLOBALS); ?>

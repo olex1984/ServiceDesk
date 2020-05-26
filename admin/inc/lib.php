@@ -152,13 +152,24 @@ function drawUsersTable($sql_data,$delete_field = NULL){
     {
         $outline .= "<tr>";
         $id = $row[0];
-        foreach ($row as $val) {
-            if(is_null($delete_field))
-                $outline .= "<td><a href='" . $_SERVER['PHP_SELF']."?action=changeUser&id=".$id."'>$val</a></td>";
+        for($i=0;$i < count($row);$i++){
+        /* foreach ($row as $val) { */
+            if(is_null($delete_field)){
+                if($i == (count($row) - 1)){ //ЕСЛИ последняя ячейка - отрисовываем картинку, если нет, просто ссылку со значением
+                    if($row[$i]) $img = "trafficlight-green_40427.png";
+                    if(!$row[$i]) $img = "trafficlight-red_40428.png";
+                    $outline .= "<td><img src='../pictures/".$img."' width='16' height='16'/></td>";
+                }else{
+                    $outline .= "<td><a href='" . $_SERVER['PHP_SELF']."?action=changeUser&id=".$id."'>$row[$i]</a></td>";
+                }
+                
+            }
+            //Если есть последнее поле(доб. или удалит.) - убираем ссылки на редактирование пользователя (ПОДРАЗДЕЛЕНИЕ ИСПОЛНИТЕЛЯ)
             if(!is_null($delete_field))
-                $outline .= "<td>$val</td>";
+                $outline .= "<td>$row[$i]</td>"; 
             
         }
+        // ОБРАБОТКА, Если есть наличие поля ДОБАВИТЬ и УДАЛИТЬ
         if(!is_null($delete_field)) 
                 if($delete_field == "delete")
                         $outline .= "<td><a href='" . $_SERVER['PHP_SELF']."?action=service_department_manage&manage=delete&id=".$id."'>Удалить</a></td>";
