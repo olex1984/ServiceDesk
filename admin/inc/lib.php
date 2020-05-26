@@ -182,6 +182,16 @@ function drawUsersTable($sql_data,$delete_field = NULL){
     }
     return $outline;
 }
+
+function userExist ($username, $table, $field){
+    global $dbh;
+    $sql = "SELECT * FROM ".$table." WHERE ".$field."='".$username."'";
+    $result = getDataFromTable($dbh, $sql);
+    if( $result->rowCount() > 0 ) 
+        return TRUE;
+
+    return FALSE;
+}
 /*
 ##################### HASH ##########################
 */

@@ -13,7 +13,7 @@ if((isset($_GET['manage']) and ($_GET['manage'] == "delete"))){
 }
 
 //======================================Состав сервисного подразделения:
-$out_service_department .= "<p>Состав сервисного подразделения:</p>";
+$out_service_department .= "<p><h3>Состав сервисного подразделения:</h3></p>";
 $sql = "SELECT service_department.id,name,description FROM users, service_department WHERE users.id = service_department.user_id ORDER BY name ASC";
 $raw_data = getDataFromTable($dbh, $sql);
 $out_service_department .= " <table class='service_department' ><tr>
@@ -21,8 +21,10 @@ $out_service_department .= " <table class='service_department' ><tr>
         </tr>";
 $out_service_department .= drawUsersTable($raw_data,"delete");
 $out_service_department .= "</table>";
+//================================================================
+$out_service_department .= "<p class='service_uparrow'></p>";
 //===========================================Добавить сотрудника:
-$out_service_department .= "<p>Добавить сотрудника:</p>";
+$out_service_department .= "<p><h3>Добавить сотрудника в сервисное подразделение:</h3></p>";
 $sql = "SELECT id,name,description FROM users ORDER BY name ASC";
 $raw_data = getDataFromTable($dbh, $sql);
 $out_service_department .= " <table class='service_department'><tr>

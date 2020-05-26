@@ -1,10 +1,28 @@
 <?php
+    
+  
 if($_GET['action'] == "add_user") {
-   
+  if(isset($error_add_user))
+    $add_user_outline = $error_add_user ." 
+    <form enctype=\"multipart/form-data\" method='POST' action='{$_SERVER['PHP_SELF']}' >
+    Email: <br><input type='text' name='inp_email' value='{$_POST['inp_email']}' /><span class='warning_text'>*</span> (будет использоваться в качестве Логина)<br>
+    Пароль:<br> <input type='password' name='inp_pass' /><span class='warning_text'>*</span> (используйте буквы латинского алфавита, цифры и спецфисмволы)<br>
+    ФИО: <br><input type='text' name='inp_name' value='{$_POST['inp_name']}' /> <br>
+    Описание: <br><input type='text' name='inp_desc' value='{$_POST['inp_desc']}' /> (например: должность)<br>
+    Заметки:<br> <textarea rows=\"5\" cols=\"45\" name=\"inp_note\">{$_POST['inp_note']}</textarea> (например: дополнительные контакты)<br>
+    <input type=\"hidden\" name=\"MAX_FILE_SIZE\" value=\"10000000\" />
+    ФОТО (макс.9МБ): <input name=\"user_photo\" type=\"file\" value=\"\" /> <br>
+    <br><input type='submit' name='user_action' value='Сохранить'/>
+    <input type=\"button\" onclick=\"javascript:window.location='user_management.php';\" value = 'Отмена'/>
+    </form><br>
+    <span class='warning_text'>* - обязательные поля</span>
+    ";
+
+    if(!isset($error_add_user))
     $add_user_outline = "
-    <form enctype=\"multipart/form-data\" method='POST' action='".$_SERVER['PHP_SELF']."' >
-    Email: <br><input type='text' name='inp_email' /> (будет использоваться в качестве Логина)<br>
-    Пароль:<br> <input type='password' name='inp_pass' /> (используйте буквы латинского алфавита, цифры и спецфисмволы)<br>
+    <form enctype=\"multipart/form-data\" method='POST' action='{$_SERVER['PHP_SELF']}' >
+    Email: <br><input type='text' name='inp_email' /><span class='warning_text'>*</span> (будет использоваться в качестве Логина)<br>
+    Пароль:<br> <input type='password' name='inp_pass' /><span class='warning_text'>*</span> (используйте буквы латинского алфавита, цифры и спецфисмволы)<br>
     ФИО: <br><input type='text' name='inp_name' /> <br>
     Описание: <br><input type='text' name='inp_desc' /> (например: должность)<br>
     Заметки:<br> <textarea rows=\"5\" cols=\"45\" name=\"inp_note\"></textarea> (например: дополнительные контакты)<br>
@@ -13,6 +31,8 @@ if($_GET['action'] == "add_user") {
     <br><input type='submit' name='user_action' value='Сохранить'/>
     <input type=\"button\" onclick=\"javascript:window.location='user_management.php';\" value = 'Отмена'/>
     </form>
+    <br>
+    <span class='warning_text'>* - обязательные поля</span>
     ";
 
     //onclick="javascript:window.location='http://stackoverflow.com';"

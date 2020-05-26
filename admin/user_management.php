@@ -21,32 +21,31 @@ if((!isset($_POST['user_action'])) and (!isset($_GET['action']))){ //ОТОБР�
     $outline .= drawUsersTable($raw_data);
     $outline .= "</table>";
 }
-
+//================================== ДЕЙСТВИЯ С УЧЕТКАМИ ПОЛЬЗОВАТЕЛЕЙ ==================================
 if(isset($_POST['user_action']) and $_POST['user_action'] == "Сохранить") //ДОБАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯ
 {
-
-  $uniqid = uploadUserPhoto();
-  if( ($uniqid != "false") and ($uniqid != "") ){
-    $data = [htmlspecialchars(trim($_POST['inp_email'])),getHashPassword(htmlspecialchars(trim($_POST['inp_pass']))),htmlspecialchars(trim($_POST['inp_name'])),$_POST['inp_desc'],$_POST['inp_note'],$uniqid,1];
-    //unset($_POST)
-    $outline = setDataInToTable($dbh, "users", $data);
-    redirectURL("user_management.php");
-    }else
-    {
-    $data = [htmlspecialchars(trim($_POST['inp_email'])),getHashPassword(htmlspecialchars(trim($_POST['inp_pass']))),htmlspecialchars(trim($_POST['inp_name'])),$_POST['inp_desc'],$_POST['inp_note'],PHOTOID,1];
-    $outline = setDataInToTable($dbh, "users", $data);
-    redirectURL("user_management.php");
-    $outline .= "<pre>Warning!!! Ваша фотография не была загружена на сервер. Попробуйте загрузить фото через редактирование профиля пользователя.</pre>";
+  $pos_at = mb_strpos(trim($_POST['inp_email']),"@");
+  $email_length = mb_strwidth(trim($_POST['inp_email']))- 1;
+  /* print_r(get_defined_vars()); */
+  if((!userExist($_POST['inp_email'], "users", "email")) and (!empty(trim($_POST['inp_email']))) and (!empty(trim($_POST['inp_pass']))) and ($pos_at > 0) and ($pos_at < $email_length) ){
+    
+    $uniqid = uploadUserPhoto();
+    if( ($uniqid != "false") and ($uniqid != "") ){
+      $data = [htmlspecialchars(trim($_POST['inp_email'])),getHashPassword(htmlspecialchars(trim($_POST['inp_pass']))),htmlspecialchars(trim($_POST['inp_name'])),$_POST['inp_desc'],$_POST['inp_note'],$uniqid,1];
+      $outline = setDataInToTable($dbh, "users", $data);
+      redirectURL("user_management.php");
+      }else
+      {
+      $data = [htmlspecialchars(trim($_POST['inp_email'])),getHashPassword(htmlspecialchars(trim($_POST['inp_pass']))),htmlspecialchars(trim($_POST['inp_name'])),$_POST['inp_desc'],$_POST['inp_note'],PHOTOID,1];
+      $outline = setDataInToTable($dbh, "users", $data);
+      $outline .= "<pre>Warning!!! Ваша фотография не была загружена на сервер. Попробуйте загрузить фото через редактирование профиля пользователя.</pre>";
+      redirectURL("user_management.php");
     }
-    //print_r($GLOBALS);
-    $raw_data = getDataFromTable($dbh,"SELECT * FROM users;");
-    $outline .= " <table style='border:2pt solid black;'><tr>
-            <th>ID</th><th>Email</th><th>Password</th><th>ФИО</th><th>Описание</th><th>Разное</th><th>Фото ID</th><th>Актвиный</th>
-        </tr>";
-    $outline .= drawUsersTable($raw_data);
-    $outline .= "</table>";
+  }else{
+    $error_add_user = "<p class='error_text'>Ошибка!!! Пользователь ".$_POST['inp_email']." уже существует в базе или вы не заполнили обязательные поля.</p>";
+    $_GET['action'] = "add_user";
   }
- 
+} 
 if(isset($_POST['user_action']) and $_POST['user_action'] == "Обновить")  //ОБНВОЛЕНЕИ ПАРАМЕТРОВ ПОЛЬЗОВАТЕЛЯ
 {
   if($_FILES['user_photo']['size'] > 0) {
@@ -64,8 +63,10 @@ if(isset($_POST['user_action']) and $_POST['user_action'] == "Обновить")
   $data = [$_POST['inp_name'],$_POST['inp_desc'],$_POST['inp_note'],$uniqid,$status];
   if(empty($_POST['inp_new_pass'])){
     $outline = updateDataInTable($dbh, "users", $_POST['id'], $data);
+    redirectURL("user_management.php");
   }else{
     $outline = updateDataInTable($dbh, "users", $_POST['id'], $data, $_POST['inp_new_pass']);
+    redirectURL("user_management.php");
   }
   
     //if(empty($_POST['inp_new_pass'])) $outline .="<p>PASS is EMPTY</p>";
