@@ -12,7 +12,8 @@ function connectSqlServer($server, $db, $db_user, $db_pass){
     try
     {
         GLOBAL $dbh;
-        $dbh = new PDO("mysql:host=".$server.";dbname=".$db, $db_user, $db_pass);
+        $dbh = new PDO("mysql:host=".$server.";dbname=".$db.";charset=utf8", $db_user, $db_pass,[ PDO::ATTR_EMULATE_PREPARES => false, 
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
     }catch (PDOException $e){               //  <<<<<<======================================== ERROR ERROR ERROR =======================
         $error = "Error:".iconv("windows-1251", "UTF-8",$e->getMessage());
         echo $error;
@@ -145,6 +146,8 @@ function addUserInTable($dbh,$table,$id){
 }
 
 function drawUsersTable($sql_data,$delete_field = NULL){
+    if(!isset($_GET['page']))
+        $_GET['page'] = 1;
     $outline = "";
     $sql_data->setFetchMode(PDO::FETCH_NUM);
     $id = 0;
@@ -172,10 +175,10 @@ function drawUsersTable($sql_data,$delete_field = NULL){
         // ОБРАБОТКА, Если есть наличие поля ДОБАВИТЬ и УДАЛИТЬ
         if(!is_null($delete_field)) 
                 if($delete_field == "delete")
-                        $outline .= "<td><a href='" . $_SERVER['PHP_SELF']."?action=service_department_manage&manage=delete&id=".$id."'>Удалить</a></td>";
+                        $outline .= "<td><a href='" . $_SERVER['PHP_SELF']."?action=service_department_manage&manage=delete&id=".$id."&page={$_GET['page']}'>Удалить</a></td>";
         if(!is_null($delete_field)) 
                 if($delete_field == "add")
-                        $outline .= "<td><a href='" . $_SERVER['PHP_SELF']."?action=service_department_manage&manage=add&id=".$id."'>Добавить</a></td>";
+                        $outline .= "<td><a href='" . $_SERVER['PHP_SELF']."?action=service_department_manage&manage=add&id=".$id."&page={$_GET['page']}'>Добавить</a></td>";
                 
         
         $outline .= "</tr>";

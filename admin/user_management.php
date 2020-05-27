@@ -14,12 +14,33 @@ if(!isset($_SESSION['authenticated']) or (!$_SESSION['authenticated']))
 
 //================ USERS OPERATIONS ======================
 if((!isset($_POST['user_action'])) and (!isset($_GET['action']))){ //ОТОБРАЖЕНИЕ СТАРОВОЙ СТРАНИЦЫ (ТУПО НИЧЕГО НЕ ВВЕДЕНО)
-    $raw_data = getDataFromTable($dbh,"SELECT * FROM users;");
-    $outline = " <table><tr>
+    $page = 1;
+    if(isset($_GET['page']))
+      $page = (integer)$_GET['page'];
+    $stmt = getDataFromTable($dbh,"SELECT COUNT(*) AS num FROM users");
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $user_count = $row['num'];//======================КОЛИЧЕСТВО ПОЛЬЗОВАТЕЛЕЙ в ТАБЛИЦЕ ==========================
+    $count_pages = ceil($user_count / USERS_ON_PAGE);
+    $offset = (integer)($page - 1);
+    $offset = $offset * USERS_ON_PAGE;
+    $raw_data = getDataFromTable($dbh,"SELECT * FROM users ORDER BY name LIMIT {$offset},".USERS_ON_PAGE);
+    $outline = "<p style='text-align:right; padding-right:5px;'>Всего: ".$user_count."</p>";
+    $outline .= " <table><tr>
             <th>ID</th><th>Email</th><th>Password</th><th>ФИО</th><th>Описание</th><th>Разное</th><th>Фото ID</th><th>Статус</th>
         </tr>";
     $outline .= drawUsersTable($raw_data);
     $outline .= "</table>";
+    //=================================== ВЫВОД СТРАНИЦ с пользователями =============================
+    $outline .= "<p style='text-align:center;'>";
+    for($i=1; $i <= $count_pages; $i++){
+      if($i == $page)
+        $outline .= "<a class='page_number_active' href='{$_SERVER['PHP_SELF']}?page={$i}'>$i</a>";
+      if($i != $page)
+        $outline .= "<a class='page_number' href='{$_SERVER['PHP_SELF']}?page={$i}'>$i</a>";
+      
+        $outline .= " ";
+    }
+    $outline .= "</p>";
 }
 //================================== ДЕЙСТВИЯ С УЧЕТКАМИ ПОЛЬЗОВАТЕЛЕЙ ==================================
 if(isset($_POST['user_action']) and $_POST['user_action'] == "Сохранить") //ДОБАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯ
