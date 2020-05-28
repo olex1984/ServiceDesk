@@ -52,9 +52,9 @@ function setDataInToTable($dbh, $table, $data)
                 $a[$i] = "?";
             }
             $pseudo = implode(",",$a);
-            $critery = implode(",",$data);
-            $critery = $dbh->quote($critery);
-            $stmt = $dbh->prepare("INSERT INTO " . $table . " values ('', ". $pseudo .")"); // довести до конца просчет ? в зависимости сколько данных в массиве 
+            /* $critery = implode(",",$data);
+            $critery = $dbh->quote($critery); */
+            $stmt = $dbh->prepare("INSERT INTO " . $table . " values (NULL, ". $pseudo .")"); // довести до конца просчет ? в зависимости сколько данных в массиве 
             $stmt->execute($safe_data);
             //$info = $stmt->errorInfo();
             return "Успешно.";
@@ -221,7 +221,8 @@ function uploadUserPhoto(){
         {
             $uniqid = getUniqId();
             $file = $_FILES;
-            $uploadfile = USER_PHOTO_PATH . $uniqid . ".jpg";//basename($file['user_photo']['name']);
+            /* $uploadfile = USER_PHOTO_PATH . $uniqid . ".jpg"; */      //basename($file['user_photo']['name']);
+            $uploadfile = USER_PHOTO_PATH_ADMIN . $uniqid . ".jpg";
             if (move_uploaded_file($file['user_photo']['tmp_name'], $uploadfile)) {
                 return $uniqid; 
                 } else {

@@ -15,6 +15,7 @@ if(!isset($_SESSION['authenticated']) or (!$_SESSION['authenticated']))
 //================ USERS OPERATIONS ======================
 if((!isset($_POST['user_action'])) and (!isset($_GET['action']))){ //ОТОБРАЖЕНИЕ СТАРОВОЙ СТРАНИЦЫ (ТУПО НИЧЕГО НЕ ВВЕДЕНО)
     $page = 1;
+    $outline = "";
     if(isset($_GET['page']))
       $page = (integer)$_GET['page'];
     $stmt = getDataFromTable($dbh,"SELECT COUNT(*) AS num FROM users");
@@ -23,24 +24,27 @@ if((!isset($_POST['user_action'])) and (!isset($_GET['action']))){ //ОТОБР�
     $count_pages = ceil($user_count / USERS_ON_PAGE);
     $offset = (integer)($page - 1);
     $offset = $offset * USERS_ON_PAGE;
-    $raw_data = getDataFromTable($dbh,"SELECT * FROM users ORDER BY name LIMIT {$offset},".USERS_ON_PAGE);
-    $outline = "<p style='text-align:right; padding-right:5px;'>Всего: ".$user_count."</p>";
+    $raw_data = getDataFromTable($dbh,"SELECT id,name,description,note,email,photo_id,status FROM users ORDER BY name LIMIT {$offset},".USERS_ON_PAGE);
+    //$raw_data = getDataFromTable($dbh,"SELECT * FROM users ORDER BY name LIMIT {$offset},".USERS_ON_PAGE);
+    $outline .= "<p style='text-align:right; padding-right:5px;'>Всего: ".$user_count."</p>";
     $outline .= " <table><tr>
-            <th>ID</th><th>Email</th><th>Password</th><th>ФИО</th><th>Описание</th><th>Разное</th><th>Фото ID</th><th>Статус</th>
+            <th>ID</th><th>Имя</th><th>Описание</th><th>Разное</th><th>E-mail</th><th>PHOTO ID</th><th>Статус</th>
         </tr>";
     $outline .= drawUsersTable($raw_data);
     $outline .= "</table>";
     //=================================== ВЫВОД СТРАНИЦ с пользователями =============================
-    $outline .= "<p style='text-align:center;'>";
-    for($i=1; $i <= $count_pages; $i++){
-      if($i == $page)
-        $outline .= "<a class='page_number_active' href='{$_SERVER['PHP_SELF']}?page={$i}'>$i</a>";
-      if($i != $page)
-        $outline .= "<a class='page_number' href='{$_SERVER['PHP_SELF']}?page={$i}'>$i</a>";
-      
-        $outline .= " ";
+    if($count_pages > 1){
+      $outline .= "<p style='text-align:center;'>";
+      for($i=1; $i <= $count_pages; $i++){
+        if($i == $page)
+          $outline .= "<a class='page_number_active' href='{$_SERVER['PHP_SELF']}?page={$i}'>$i</a>";
+        if($i != $page)
+          $outline .= "<a class='page_number' href='{$_SERVER['PHP_SELF']}?page={$i}'>$i</a>";
+        
+          $outline .= " ";
+      }
+      $outline .= "</p>";
     }
-    $outline .= "</p>";
 }
 //================================== ДЕЙСТВИЯ С УЧЕТКАМИ ПОЛЬЗОВАТЕЛЕЙ ==================================
 if(isset($_POST['user_action']) and $_POST['user_action'] == "Сохранить") //ДОБАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯ

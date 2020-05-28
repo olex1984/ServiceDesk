@@ -56,7 +56,7 @@ if( isset($_POST['sub_enter'])  ){
                 Вход:<br>
                 <p><input type="text" name="login" placeholder = "Логин(email)"/></p>
                 <p><input type="password" name="password" placeholder = "Пароль"/></p>
-                <input type="submit" name="sub_enter" value = "Enter" />
+                <input type="submit" name="sub_enter" value = "Войти" />
             </form>
         </div>
         
