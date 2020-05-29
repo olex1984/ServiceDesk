@@ -82,7 +82,7 @@ if($_GET['action'] == "changeUser"){
     
     </form>
     ";
-
     //if($_SERVER['REQUEST_METHOD'])
     //print_r($GLOBALS);
+    
 }

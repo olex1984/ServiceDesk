@@ -47,12 +47,11 @@ if((!isset($_POST['user_action'])) and (!isset($_GET['action']))){ //ОТОБР�
     }
 }
 //================================== ДЕЙСТВИЯ С УЧЕТКАМИ ПОЛЬЗОВАТЕЛЕЙ ==================================
-if(isset($_POST['user_action']) and $_POST['user_action'] == "Сохранить") //ДОБАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯ
-{
+if(isset($_POST['user_action']) and $_POST['user_action'] == "Сохранить"){ //ДОБАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯ
   $pos_at = mb_strpos(trim($_POST['inp_email']),"@");
   $email_length = mb_strwidth(trim($_POST['inp_email']))- 1;
   /* print_r(get_defined_vars()); */
-  if((!userExist($_POST['inp_email'], "users", "email")) and (!empty(trim($_POST['inp_email']))) and (!empty(trim($_POST['inp_pass']))) and ($pos_at > 0) and ($pos_at < $email_length) ){
+  if((!userExist($_POST['inp_email'], "users", "email")) and (!empty(trim($_POST['inp_email'])))  and ($pos_at > 0) and ($pos_at < $email_length) ){
     
     $uniqid = uploadUserPhoto();
     if( ($uniqid != "false") and ($uniqid != "") ){
@@ -175,8 +174,8 @@ if(isset($_GET['action'])){
 </div>
 <!-- FOOTER-->
 <div id="footer">
- <p> <a href="mailto:oleg.zitzer@gmail.com">Author: Oleg Citcer<br>oleg.zitzer@gmail.com</a></p>
- <p>Saratov, Russia 2020</p>
+ <p> <a href="mailto:oleg.zitzer@gmail.com">Разработчик: Цитцер Олег<br>oleg.zitzer@gmail.com</a></p>
+ <p>Саратов, Россия 2020</p>
 </div>
 </body>
 </html>

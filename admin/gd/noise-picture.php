@@ -14,9 +14,11 @@ for ($i=0; $i<$nChars; $i++)
 {
     $size = rand(24, 30);
     $angle = -30 + rand(0,60);
-    imageTtfText($img, $size, $angle, $x, $y, $color, "C:/xampp/htdocs/servicedesk/admin/gd/fonts/bellb.ttf", $randStr{$i});
+    //WINDOWS VERSION
+    //imageTtfText($img, $size, $angle, $x, $y, $color, "C:/xampp/htdocs/servicedesk/bellb.ttf", $randStr{$i});
+    //LINUX VERSION
+    imageTtfText($img, $size, $angle, $x, $y, $color, "/var/www/html/servicedesk/bellb.ttf", $randStr{$i});
     $x += $deltaX;
 }
-
 header ("Content-type: image/jpeg");
 imageJpeg($img); 
