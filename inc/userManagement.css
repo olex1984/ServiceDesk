@@ -1,0 +1,217 @@
+body {
+	color: #3f3f3f;
+	font: 12px Tahoma, sans-serif;
+	background-color: #e2e2e2;
+	border-top: 5px solid #7e7e7e;
+	margin: 0;
+	padding-top: 10px;
+	/*border: 2px solid blue;*/
+	
+}
+#wrapper {
+	max-width: 1000px;
+	margin: auto;
+	/*border: 2px solid blue;*/
+}
+.header {
+	padding: 5px;
+	/*background-color: #e86d1f;*/
+	display: table;
+	width:100%;
+	border-radius: 4px;
+	/*border-bottom:2px solid #e86d1f;*/
+}
+.logotip {
+	display: table-cell;
+	width: 250px;
+	height: 90px;
+	background: url("../../pictures/logo-tritec-.png") no-repeat;
+	/* background-size: 200px 100px; */
+	text-align: center;
+    /* border: #ffffff 1px solid; */
+}
+.header_text{
+	display: table-cell;
+	width: 780px;
+	text-align: center;
+	vertical-align: middle;
+}
+/*.header_text h1{
+	color: white;
+}*/
+.user_place{
+	text-align: right;
+	display: table-cell;
+	width: 100px;
+	/* border: 2px solid blue; */
+}
+.navigation{
+	margin-top: 10px;
+	/* border-top: 2px solid #3f3f3f; */
+	padding-top: 5px;
+	/* border-bottom: 2px solid #3f3f3f; */
+	padding-bottom: 5px;
+}
+.nav {
+	color: white;
+	display: inline-block; /*Задаем блочно-строчное отображение*/
+	  width: 32%; /*задаем ширину блока*/
+	  height: 20px;
+	vertical-align: middle;
+	border:2px solid #e86d1f;
+	background: #e86d1f;
+	border-radius: 5px;
+	text-align: center;
+	padding-top: 5px;
+	margin-left: 5px;	
+}
+.nav:hover{
+	color: #3f3f3f;
+	background: white;
+	
+} 
+
+
+#footer{
+	width: 100%;
+	height: 80px;
+	color: #e86d1f;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	margin-top: 10px;
+	padding-top: 40px;
+	/* border: 2px solid #858585; */
+	/* border: 2px green solid; */
+	background: url("../../pictures/BACKGROUND-FOOTER-1_full.png");    
+} 
+#footer a{
+	font-weight: bold;
+	text-decoration: none;
+	color: #e86d1f;
+	vertical-align: middle;
+	text-align: center;
+}
+#footer a:hover{
+	font-weight: bold;
+	text-decoration: none;
+	color: #ffffff;
+	vertical-align: middle;
+	text-align: center;
+}
+.service_department {
+	width: 100%;
+	border: 2pt solid #3f3f3f;
+}
+.service_department a{
+	color: #ffffff;
+	background: #3f3f3f;
+	border: 2px solid #3f3f3f;
+	border-radius: 3px;
+}
+.service_department a:hover{
+	color: #ffffff;
+	background: #e86d1f;
+	border: 2px solid #e86d1f;
+	border-radius: 3px;
+}
+a{
+	font-weight: bold;
+	text-decoration: none;
+	color: #3f3f3f;
+	vertical-align: middle;
+	text-align: center;
+}
+a:hover{
+	color: #ffffff;
+	background: #e86d1f;
+}
+h1{
+	color: #3f3f3f;
+}
+table{
+	border-spacing: 0px;
+	border-radius: 4px;
+	width: 100%;
+	border: 2pt solid #3f3f3f;
+	text-align: center;
+	
+}
+table th{
+	padding: 10px;
+	color: #e86d1f;
+	background: #3f3f3f;
+	border: 1pt solid #ffffff;
+	border-spacing: 0px;
+}
+table td{
+	border-spacing: 0px;
+	border: 1pt solid #3f3f3f;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+input{
+	border:1px solid #9b9b9b;
+	border-radius: 3px;	
+	
+}
+input[type="text"]{
+	width: 35ch;	
+}
+input[type="password"]{
+	width: 35ch;	
+}
+textarea{
+	border:1px solid #9b9b9b;
+	border-radius: 3px;
+}
+.error_text{
+	color:white;
+	font-weight: bold;
+	font-size: large;
+	border: 1px solid red;
+	border-radius: 3px;
+	background-color: red;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.message_info{
+	font-weight: bold;
+	font-size: large;
+	color: #3f3f3f;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 3px;
+	border: 1px solid #e86d1f;
+	background-color: #e86d1f;
+}
+.warning_text {
+	color:red;
+	font-weight: bold;
+	/* font-size: large; */
+	/* border: 1px solid red;
+	border-radius: 2px; */
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.service_uparrow{
+	background-image: url("../../pictures/uparrow_arriba_4430.png");
+	background-position-x: 20px;
+	height: 100px;
+}
+.page_number{
+	border-radius: 3px;
+	border: 1px solid #9b9b9b;
+	background-color: #9b9b9b;
+	color:white;
+	font-weight: bold;
+	padding: 3px;
+}
+.page_number_active{
+	border-radius: 3px;
+	border: 1px solid #e86d1f;
+	background-color: #e86d1f;
+	color:white;
+	font-weight: bold;
+	padding: 3px;
+}
