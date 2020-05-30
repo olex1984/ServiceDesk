@@ -3,8 +3,9 @@ require_once "inc/config.php";
 $form_header = "<h1>Service Desk</h1>";
 //================================SESSION CHECK =========================================
 /* if( (!isset($_SESSION['username'] ) ) or ( !isset($_SESSION['password'] ) ) or ( !isset($_SESSION['authenticated']) ) ) */
-if(!isset($_SESSION['authenticated']) or (!$_SESSION['authenticated']))
+if(!isset($_SESSION['authenticated']) or (!$_SESSION['authenticated']) or ($_SESSION['client_ip'] != getClientIp()) )
 {
+  session_destroy();
   redirectURL("auth.php");
   exit("Вы не авторизованы в системе");
    }else{
@@ -35,7 +36,7 @@ if(!isset($_SESSION['authenticated']) or (!$_SESSION['authenticated']))
 	<div class="header">
     <div class="logotip">
     </div>
-    <div class="header_text"><h1>Администрирование</h1></div>
+    <div class="header_text"><h1>SERVICE DESK</h1></div>
     <div class="user_place">
       <?= "<br>Вход выполнен, ".$_SESSION['username'] ."
         <br><br>
@@ -45,8 +46,8 @@ if(!isset($_SESSION['authenticated']) or (!$_SESSION['authenticated']))
   <!-- ТOP MENU-->
   <div class="navigation">
 	  <a class="nav" href= <?= $_SERVER['PHP_SELF']?> > Главная </a>
-    <a class="nav" href= <?= $_SERVER['PHP_SELF']."?action=add_user"?>>Добавить нового пользователя</a>
-    <a class="nav" href= <?= $_SERVER['PHP_SELF']."?action=service_department_manage"?>>Настроить подразделение исполнителя</a>
+    <a class="nav" href= <?= $_SERVER['PHP_SELF']."?action=add_user"?>>Создать обращение</a>
+    <a class="nav" href= <?= $_SERVER['PHP_SELF']."?action=service_department_manage"?>>,,,,,,,,,,,,,,,,,,</a>
   </div>
   <!-- CONTENT-->
   <div class="parent">

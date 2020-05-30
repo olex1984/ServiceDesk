@@ -17,6 +17,44 @@ function isWindows(){
         return true;
     }
 }
+function getClientIp(){
+    //
+    $client  = @$_SERVER['HTTP_CLIENT_IP'];
+    $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+    $remote  = @$_SERVER['REMOTE_ADDR'];
+    
+    if(filter_var($client, FILTER_VALIDATE_IP)) $ip = $client;
+    elseif(filter_var($forward, FILTER_VALIDATE_IP)) $ip = $forward;
+    else $ip = $remote;
+    
+    return $ip;
+}
+function checkStronglyPassword($pwd){
+    $hasDigit = 0;
+    $hasAlphabetUpper = 0;
+    $hasAlphabet = 0;
+    $password = mb_str_split($pwd);
+    $result = array_intersect($password, DIGITS);
+    if(count($result) > 0)
+        $hasDigit = 1;
+    $result = array_intersect($password, ALPHABET);
+    if(count($result) > 0)
+        $hasAlphabet = 1;
+    
+    $alphabetUpper = [];
+    foreach( ALPHABET as $val)
+        $alphabetUpper = mb_strtoupper($val);
+    
+    $result = array_intersect($password, $alphabetUpper);
+    if(count($result) > 0)
+        $hasAlphabetUpper = 1;
+
+    if($hasDigit and $hasAlphabet and $hasAlphabetUpper){
+        return true;
+    }else{
+        return false;
+    }
+}
 /* 
 ##################### MYSQL ###############################
 */
@@ -225,32 +263,7 @@ function getHashPassword($string){
     return $hash;
 }
 
-function checkStronglyPassword($pwd){
-    $hasDigit = 0;
-    $hasAlphabetUpper = 0;
-    $hasAlphabet = 0;
-    $password = mb_str_split($pwd);
-    $result = array_intersect($password, DIGITS);
-    if(count($result) > 0)
-        $hasDigit = 1;
-    $result = array_intersect($password, ALPHABET);
-    if(count($result) > 0)
-        $hasAlphabet = 1;
-    
-    $alphabetUpper = [];
-    foreach( ALPHABET as $val)
-        $alphabetUpper = mb_strtoupper($val);
-    
-    $result = array_intersect($password, $alphabetUpper);
-    if(count($result) > 0)
-        $hasAlphabetUpper = 1;
 
-    if($hasDigit and $hasAlphabet and $hasAlphabetUpper){
-        return true;
-    }else{
-        return false;
-    }
-}
 /*
 ##################### USERS MANAGEMENT ##########################
 */

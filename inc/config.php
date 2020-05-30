@@ -12,6 +12,7 @@ define("USERS_ON_PAGE",25);
 //================================================================== SERVICE
 define("DIGITS",[0,1,2,3,4,5,6,7,8,9]);
 define("ALPHABET",['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']);
+define("SECRET_PASSWORD","gfhjkm"); // "пароль" в англ раскладке
 //================================================================== PHOTO - LOGO 
 if(isWindows())
 define("FONT_PATH","C:/xampp/htdocs/servicedesk/bellb.ttf");
