@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once "inc/lib.php";
-$outline = "";
+
 //=================================================================== SQL 
 setlocale(LC_ALL,"russian");
 define("SERVER","localhost");
