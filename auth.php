@@ -1,4 +1,6 @@
-<?php
+<?php 
+session_start();
+$_SESSION['pageFrom'] = "auth.php";
 require_once "inc/config.php";
 $outline = "";
 $secret_input = "";
@@ -14,7 +16,8 @@ if( (isset($_SESSION['authenticated'])) and ($_SESSION['authenticated']) ){
 }
 
 if( isset($_POST['sub_enter'])  ){
-    if((isset($_POST['secret_input'])) and ($_POST['secret_input'] == SECRET_PASSWORD) and (!empty($_POST['id'])) and (!empty($_POST['password'])) ){//======= Устанавливается ПАРОЛЬ
+    if((isset($_POST['secret_input'])) and ($_POST['secret_input'] == SECRET_PASSWORD) and (!empty($_POST['id'])) and (!empty($_POST['password'])) ){
+        //======= Устанавливается ПАРОЛЬ
         //$result = "start update";
         //echo $result;
         $pwd = getHashPassword(trim($_POST['password']));
@@ -51,6 +54,7 @@ if( isset($_POST['sub_enter'])  ){
         $sql = "SELECT email,password,status FROM users WHERE email='" . $_POST['login'] ."'";
         $raw_data = getDataFromTable($dbh,$sql);
         $count = $raw_data->rowCount();
+        
         if( $count == 1 ){
             
             $arr = $raw_data->fetch(PDO::FETCH_ASSOC);

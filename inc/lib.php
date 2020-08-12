@@ -1,13 +1,18 @@
-<?php
-if(!isset($_SESSION['authenticated']) or (!$_SESSION['authenticated']) or ($_SESSION['client_ip'] != getClientIp()) )
+<?php  
+if ($_SESSION['pageFrom'] != "auth.php") 
 {
-  session_destroy();
-  redirectURL("auth.php");
-  exit("Вы не авторизованы в системе");
-   }else{
-  $username = $_SESSION['username'];
+    if(!isset($_SESSION['authenticated']) or (!$_SESSION['authenticated']) or ($_SESSION['client_ip'] != getClientIp()) )
+    {
+        
+        redirectURL("auth.php");
+        session_destroy();
+        
+        //exit("Вы не авторизованы в системе");
+    } else {
+        $username = $_SESSION['username'];
+    
+    }
 }
-
 //============================================================ SYSTEM ====================
 function redirectURL($url){
     header("HTTP/1.1 303 See Other");

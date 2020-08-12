@@ -1,4 +1,6 @@
-<?php
+<?php 
+session_start();
+$_SESSION['pageFrom'] = "index.php";
 require_once "inc/config.php";// SESSION CHECK is there
 $form_header = "<h1>Service Desk</h1>";
 $header_text = $form_header;
